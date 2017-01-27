@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html ng-app="mainApp" ng-cloak>
+    <head>
+        <title>Wikipedia Finder</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+        <script src="main.js"></script>
+    </head>
+    <body>
+        <script>
+            $(document).ready(function(){
+               $("input[type='text']").on('focus',function(){
+                  $(".searchIcon").addClass("focused");
+               });
+               $("input[type='text']").on('blur',function(){
+                  $(".searchIcon").removeClass("focused");
+               });
+            });
+        </script>
+        <h1 id="heading">Got an something on your mind?</h1>
+        <div id="searchWrapper" ng-controller="apiCtrl">
+            <div id="searchBoxDiv">
+            <form ng-submit="search()">
+            <div>
+                <input type="text" class="searchBar" 
+                       placeholder="What are we looking for?"/>
+                    <span class="searchIcon"></span>
+            </div>
+                <input class="hidden" type="submit"/>
+            </form>
+                </div>
+            <ul>
+                <li ng-repeat="p in pages">
+                    <a href="{{link+p.pageid}}">
+                    <div class="articleBlock">
+                        <h4>{{p.title}}</h4>
+                        <p>{{p.extract}}</p>
+                    </div></a>
+                </li>
+            </ul>
+        </div>
+        
+    </body>
+</html>
